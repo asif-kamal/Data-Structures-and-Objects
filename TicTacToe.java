@@ -1,18 +1,20 @@
-import java.util.Arrays;
-
 public class TicTacToe {
     private char[][] board;
     private boolean isXTurn;
 
     public TicTacToe(char[][] board) {
         this.board = board;
-        this.board = new char[][] { {'-','-','-'}, {'-','-','-'}, {'-','-','-'} };
+        this.board = new char[][] { {'-','-','-'}, {'-','-','-'}, {'-','-','-'} }; //single quotes for char array
     
     }
 
-    public void move() {
+    public void move(int row, int col) {
         if(isXTurn) {
-            
+            this.board[row][col] = 'X';
+            isXTurn = false;
+        } else {
+            this.board[row][col] = 'O';
+            isXTurn = true;
         }
     }
 
