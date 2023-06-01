@@ -11,16 +11,20 @@ public class TicTacToe {
 
     public void move(int row, int col) {
         if (isXTurn) {
-            this.board[row][col] = 'X';
-            isXTurn = false;
+            if (this.board[row][col] == '-') {
+                this.board[row][col] = 'X';
+                isXTurn = false;
+            }
         } else {
-            this.board[row][col] = 'O';
-            isXTurn = true;
+            if (this.board[row][col] == '-') {
+                this.board[row][col] = 'O';
+                isXTurn = true;
+            }
         }
     }
 
     public void displayTheBoard() {
-        for (int index = 0; index < this.board.length; index++) {
+        for (int index = 0; index < this.board.length; index++) { //the first row is at the top of the matrix
             for (int i = 0; i < this.board[index].length; i++) {
                 System.out.print(this.board[index][i] + " ");
             }
@@ -114,6 +118,6 @@ public class TicTacToe {
     }
 
     public void restartGame() {
-        new TicTacToe(new char[0][0]);
+        this.board = new char[][] { { '-', '-', '-' }, { '-', '-', '-' }, { '-', '-', '-' } };
     }
 }
