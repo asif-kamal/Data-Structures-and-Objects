@@ -24,12 +24,14 @@ public class TicTacToe {
     }
 
     public void displayTheBoard() {
+        System.out.println();
         for (int index = 0; index < this.board.length; index++) { //the first row is at the top of the matrix
             for (int i = 0; i < this.board[index].length; i++) {
                 System.out.print(this.board[index][i] + " ");
             }
             System.out.println();
         }
+        System.out.println();
         // System.out.println(Arrays.deepToString(this.board));
     }
 
