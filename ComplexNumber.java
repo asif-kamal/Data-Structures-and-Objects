@@ -34,10 +34,10 @@ public class ComplexNumber {
     }
 
     public ComplexNumber division(ComplexNumber other) {
-        double denominator = (this.real * this.real) + (this.complex * this.complex);
+        double denominator = (other.real * other.real) + (other.complex * other.complex);
         // System.out.println(denominator);
         double newReal = ((this.real * other.real) + (this.complex * other.complex))/denominator;
-        double newComplex = ((this.real * other.complex) - (other.real * this.complex))/denominator;
+        double newComplex = ((this.complex * other.real) - (this.real * other.complex))/denominator;
         System.out.println(new ComplexNumber(newReal, newComplex));
         return new ComplexNumber(newReal, newComplex);
     }
