@@ -13,7 +13,6 @@ public class ListMethodsAndStringsDriver {
         myList.add("AajA");
         myList.add("AdaA");
 
-
         System.out.println(ListMethodsAndStrings.unique(myList));
 
         ArrayList<Integer> newList = new ArrayList<>();
@@ -27,9 +26,16 @@ public class ListMethodsAndStringsDriver {
         newList.add(2278);
 
         System.out.println(ListMethodsAndStrings.allMultiples(newList, 2));
+
+        ArrayList<String> newList2 = new ArrayList<>(
+                List.of("Hello", "world", "supplychain", "music", "guitar", "homework", "internship", "Microsoft",
+                        "apple", "plum", "grapes"));
+
+        System.out.println(ListMethodsAndStrings.allStringsOfSize(newList2, 5));
+
+        String words = "There once was a monster down the street from our house. We were all afraid to walk by it. The windows were broken in, and the lawn was uncared for...";
+
+        System.out.println(ListMethodsAndStrings.stringToListOfWords(words));
     }
-
-    
-
 
 }
