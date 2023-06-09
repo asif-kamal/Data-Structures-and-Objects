@@ -36,6 +36,15 @@ public class ListMethodsAndStringsDriver {
         String words = "There once was a monster down the street from our house. We were all afraid to walk by it. The windows were broken in, and the lawn was uncared for...";
 
         System.out.println(ListMethodsAndStrings.stringToListOfWords(words));
+
+        ArrayList<Integer> newList3 = new ArrayList<>(List.of(1, 4, 5, 6,
+                5, 5, 2));
+
+        ArrayList<String> newList4 = new ArrayList<>(
+                List.of("money", "bear", "fruits", "frog", "princess", "genie", "money", "bear", "bear"));
+
+        ListMethodsAndStrings.removeAllInstances(newList3, 5);
+        ListMethodsAndStrings.removeAllInstances(newList4, "bear");
     }
 
 }
