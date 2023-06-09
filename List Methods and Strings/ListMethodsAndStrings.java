@@ -40,4 +40,16 @@ public class ListMethodsAndStrings {
         return newList;
     }
 
+    public static <E> void removeAllInstances(List<E> list, E item) {
+
+        for (int i = list.size() - 1; i >= 0; i--) {
+            if (list.get(i) == item) {
+                list.remove(list.get(i));
+            }
+        }
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(list.get(i));
+        }
+    }
+
 }
