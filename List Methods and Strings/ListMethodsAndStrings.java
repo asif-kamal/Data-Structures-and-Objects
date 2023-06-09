@@ -14,8 +14,30 @@ public class ListMethodsAndStrings {
             if (list.get(index) % myInt == 0) {
                 newList.add(list.get(index));
             }
-        } 
+        }
         return newList;
-    } 
+    }
+
+    public static List<String> allStringsOfSize(List<String> list, int length) {
+        // find strings of certain characters long based on int length
+        ArrayList<String> newList = new ArrayList<>();
+
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).length() == length) {
+                newList.add(list.get(i));
+            }
+        }
+        return newList;
+    }
+
+    public static List<String> stringToListOfWords(String words) {
+        ArrayList<String> newList = new ArrayList<>();
+
+        String[] newList2 = words.split("[\\p{Punct}\\s]+");
+        for (int i = 0; i < newList2.length; i++) {
+            newList.add(newList2[i]);
+        }
+        return newList;
+    }
 
 }
