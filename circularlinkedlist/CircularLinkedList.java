@@ -13,6 +13,8 @@ public class CircularLinkedList<E> implements Iterable<E> {
 
 	public CircularLinkedList() {
 		size = 0;
+		this.head = null;
+		this.tail = null;
 	}
 
 	// I highly recommend using this helper method
@@ -59,7 +61,7 @@ public class CircularLinkedList<E> implements Iterable<E> {
 			tail = adding;
 		} else if (index == size) {
 			// adding.prev = tail;
-			
+
 			tail.next = adding;
 			tail = adding;
 			tail.next = head;
@@ -89,16 +91,18 @@ public class CircularLinkedList<E> implements Iterable<E> {
 
 		if (size == 1) {
 			toReturn = head.item;
-			head = tail;
-			tail = head;
+			head = null;
+			tail = null;
 
 		} else if (index == 0) {
 			toReturn = head.item;
 			head = head.next;
-			tail = head;
+			tail.next = head;
 			// head.prev = null;
 		} else if (index == size - 1) {
+			Node<E> before = getNode(size - 2);
 			toReturn = tail.item;
+			tail = before;
 			tail.next = head;
 		} else {
 			Node<E> before = getNode(index - 1);
@@ -214,16 +218,25 @@ public class CircularLinkedList<E> implements Iterable<E> {
 
 		Iterator<Integer> iter = circLinkedList.iterator();
 
-	
+		// while (iter.hasNext()) {
+		// 	for (int i = 1; i < circLinkedList.size; i++) {
+		// 		if (i == k) {
+		// 			circLinkedList.remove(i);
+		// 			iter.next();
+		// 		}
 
-			while (iter.hasNext()) {
-				for (int i = 1; i < circLinkedList.size; i++) {
-					iter.next();
-					
+		// 	}
+		// 	System.out.println(circLinkedList.toString());
+		// }
+
+		while (iter.hasNext()) {
+			for (int i = n + 1; i < circLinkedList.size; i++) {
+				iter.next();
+
 			}
 			circLinkedList.remove();
 			System.out.println(circLinkedList);
 		}
-		
+
 	}
 }
