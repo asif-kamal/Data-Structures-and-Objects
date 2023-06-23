@@ -61,10 +61,10 @@ public class CircularLinkedList<E> implements Iterable<E> {
 
 		} else if (index == size) {
 			// adding.prev = tail;
-
+		
 			tail.next = adding;
 			tail = adding;
-			nodeName.next = head;
+			adding.next = head;
 		} else {
 			Node<E> before = getNode(index - 1);
 			adding.next = before.next;
@@ -216,7 +216,7 @@ public class CircularLinkedList<E> implements Iterable<E> {
 			circLinkedList.add(i);
 		}
 
-		Iterator<Integer> iter = circLinkedList.iterator();
+		// Iterator<Integer> iter = circLinkedList.iterator();
 
 		// while (iter.hasNext()) {
 		// 	for (int i = 1; i < circLinkedList.size; i++) {
@@ -229,12 +229,12 @@ public class CircularLinkedList<E> implements Iterable<E> {
 		// 	System.out.println(circLinkedList.toString());
 		// }
 
-		while (objectName.iterator().hasNext()) {
+		while (circLinkedList.iterator().hasNext()) {
 			for (int j = 0; j < k; j ++) {
-				iter.next();
+				circLinkedList.iterator().next();
 
 			}
-			iterator.remove()
+			circLinkedList.iterator().remove();
 			System.out.println(circLinkedList);
 		}
 
