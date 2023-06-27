@@ -33,59 +33,35 @@ public class MazeGridPanel extends JPanel {
 
 		// going down is row +1, going left to right is col + 1
 
-		Cell lastElement = stack.lastElement();
-		if (lastElement.row > 0 && lastElement.col > 0) {
-			while (!(stack.isEmpty()) && (!(visited(lastElement.row + 1, lastElement.col))
-					|| !(visited(lastElement.row, lastElement.col - 1))
-					|| !(visited(lastElement.row - 1, lastElement.col))
-					|| !(visited(lastElement.row, lastElement.col + 1)))) {
-				Cell current = stack.peek();
+		//Cell firstElement = stack.firstElement();
+		while (!(stack.isEmpty()) && (stack.peek().getBackground() != Color.RED)) {
+			Cell current = stack.peek();
+			//use stack.peek() to access current Cell
 
-				if (!current.northWall && !visited(current.row - 1, current.col)) {
-					stack.push(maze[current.row - 1][current.col]);
-					current.setBackground(Color.GREEN);
+			if (!current.northWall && !visited(current.row - 1, current.col)) {
+				current.setBackground(Color.GREEN);
+				stack.push(maze[current.row - 1][current.col]);
 
-				} else if (!current.southWall && !visited(current.row + 1, current.col)) {
-					stack.push(maze[current.row + 1][current.col]);
-					current.setBackground(Color.GREEN);
+			} else if (!current.southWall && !visited(current.row + 1, current.col)) {
+				current.setBackground(Color.GREEN);
+				stack.push(maze[current.row + 1][current.col]);
 
-				} else if (!current.eastWall && !visited(current.row, current.col + 1)) {
-					stack.push(maze[current.row][current.col + 1]);
-					current.setBackground(Color.GREEN);
+			} else if (!current.eastWall && !visited(current.row, current.col + 1)) {
+				current.setBackground(Color.GREEN);
+				stack.push(maze[current.row][current.col + 1]);
 
-				} else if (!current.westWall && !visited(current.row, current.col - 1)) {
-					stack.push(maze[current.row][current.col - 1]);
-					current.setBackground(Color.GREEN);
+			} else if (!current.westWall && !visited(current.row, current.col - 1)) {
+				current.setBackground(Color.GREEN);
+				stack.push(maze[current.row][current.col - 1]);
 
-				} else {
-					current.setBackground(Color.GRAY);
-					stack.pop();
-				}
+			} else {
+				current.setBackground(Color.GRAY);
+				stack.pop();
 			}
-
-			// visited(current.row,current.col)
-			// maze[current.row ][current.col]
-
-		} else {
-			while (!(stack.isEmpty()) && (!(visited(lastElement.row + 1, lastElement.col))
-					|| !(visited(lastElement.row, lastElement.col + 1)))) {
-				Cell current = stack.peek();
-
-				if (!current.southWall && !visited(current.row + 1, current.col)) {
-					stack.push(maze[current.row + 1][current.col]);
-					current.setBackground(Color.GREEN);
-
-				} else if (!current.eastWall && !visited(current.row, current.col + 1)) {
-					stack.push(maze[current.row][current.col + 1]);
-					current.setBackground(Color.GREEN);
-
-				} else {
-					current.setBackground(Color.GRAY);
-					stack.pop();
-				}
-			}
-
 		}
+
+		// visited(current.row,current.col)
+		// maze[current.row ][current.col]
 
 	}
 
