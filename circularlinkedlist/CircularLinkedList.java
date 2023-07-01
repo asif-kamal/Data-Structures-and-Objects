@@ -46,7 +46,7 @@ public class CircularLinkedList<E> implements Iterable<E> {
 	// adding anywhere else
 	// REMEMBER TO INCREMENT THE SIZE
 	public void add(int index, E item) {
-		if (index < 0 || index >= size) {
+		if (index < 0 || index > size) {
 			throw new IndexOutOfBoundsException(index);
 		}
 		Node<E> adding = new Node<E>(item); // added <E>
@@ -61,7 +61,7 @@ public class CircularLinkedList<E> implements Iterable<E> {
 
 		} else if (index == size) {
 			// adding.prev = tail;
-		
+
 			tail.next = adding;
 			tail = adding;
 			adding.next = head;
@@ -84,7 +84,7 @@ public class CircularLinkedList<E> implements Iterable<E> {
 	// removing any other node
 	// REMEMBER TO DECREMENT THE SIZE
 	public E remove(int index) {
-		if (index < 0 || index >= size) {
+		if (index < 0 || index > size) {
 			throw new IndexOutOfBoundsException(index);
 		}
 		E toReturn = null;
@@ -209,33 +209,22 @@ public class CircularLinkedList<E> implements Iterable<E> {
 
 		CircularLinkedList<Integer> circLinkedList = new CircularLinkedList<>();
 
-		int n = 41;
-		int k = 3;
+		int n = 13;
+		int k = 2;
 
-		for (int i = 1; i < n+1; i++) {
+		for (int i = 1; i < n + 1; i++) {
 			circLinkedList.add(i);
 		}
 
-		// Iterator<Integer> iter = circLinkedList.iterator();
+		Iterator<Integer> iter = circLinkedList.iterator();
 
-		// while (iter.hasNext()) {
-		// 	for (int i = 1; i < circLinkedList.size; i++) {
-		// 		if (i == k) {
-		// 			circLinkedList.remove(i);
-		// 			iter.next();
-		// 		}
-
-		// 	}
-		// 	System.out.println(circLinkedList.toString());
-		// }
-
-		while (circLinkedList.iterator().hasNext()) {
-			for (int j = 0; j < k; j ++) {
-				circLinkedList.iterator().next();
+		while (iter.hasNext()) {
+			for (int j = 0; j < k; j++) {
+				iter.next();
 
 			}
-			circLinkedList.iterator().remove();
 			System.out.println(circLinkedList);
+			iter.remove();
 		}
 
 	}

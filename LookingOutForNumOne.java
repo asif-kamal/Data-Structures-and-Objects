@@ -142,7 +142,7 @@ public class LookingOutForNumOne {
         // 1465, 1858 };
 
         // nthDigitTally(0, enrollment);
-        int[] arr = readMysteriousNumbers("cities_pop.txt");
+        int[] arr = readMysteriousNumbers("total_cases.txt");
 
         // for (int i = 0; i < arr.length; i++) {
         // System.out.println(arr[i]);
