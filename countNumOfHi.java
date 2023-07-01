@@ -16,3 +16,4 @@ public class countNumOfHi {
     System.out.println(countHi(str));
   }
 }
+//CodingBat problems
