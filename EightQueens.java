@@ -16,25 +16,26 @@ public class EightQueens {
                 if (eightQueens(board, col + 1)) {
                     return true;
                 }
+                board[i][col] = 0;
             }
-            board[i][col] = 0;
         }
         return false;
     }
 
-    public static boolean isValid(int[][] board, int row, int col) {
-
+    private static boolean isValid(int[][] board, int row, int col) {
+        // check to the right
         for (int i = 0; i < col; i++) {
             if (board[row][i] == 1) {
                 return false;
             }
         }
-
+        // check NW
         for (int i = row, j = col; i >= 0 && j >= 0; i--, j--) {
             if (board[i][j] == 1) {
                 return false;
             }
         }
+        // check SW
         for (int i = row, j = col; i < board.length && j >= 0; i++, j--) {
             if (board[i][j] == 1) {
                 return false;
@@ -46,6 +47,6 @@ public class EightQueens {
     public static void main(String[] args) {
         int[][] board = new int[8][8];
         int col = 0;
-        System.out.println(eightQueens(board, col));
+        eightQueens(board, col);
     }
 }
