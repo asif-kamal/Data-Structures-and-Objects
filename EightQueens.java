@@ -16,15 +16,17 @@ public class EightQueens {
                 if (eightQueens(board, col + 1)) {
                     return true;
                 }
-                board[i][col] = 0; //moving this line inside of the first if 
-                //block works as well as just inside the for loop
+                board[i][col] = 0; // moving this line inside of the first if
+                // block works as well as just inside the for loop
             }
         }
         return false;
     }
 
     private static boolean isValid(int[][] board, int row, int col) {
-        // check to the right
+        // no need to check if space is unoccupied since each column has a new queen
+
+        // check to the left
         for (int i = 0; i < col; i++) {
             if (board[row][i] == 1) {
                 return false;
