@@ -18,11 +18,11 @@ public class Sudoku {
                 System.out.println(Arrays.toString(rowN));
             }
             System.out.println();
-            sum += (100*board[0][0] + 10*board[0][1] + board[0][2]);
+            sum += (100 * board[0][0] + 10 * board[0][1] + board[0][2]);
             return true;
         }
         if (board[row][col] != 0) {
-            return solveSudoku(board, row, col + 1);
+            return solveSudoku(board, row, col + 1); // had to return method result instead of just running the method
         }
         for (int i = 1; i <= board.length; i++) {
             if (isValid(board, row, col, i)) {
@@ -30,7 +30,7 @@ public class Sudoku {
                 if (solveSudoku(board, row, col + 1)) {
                     return true;
                 }
-                board[row][col] = 0;
+                board[row][col] = 0;// needed to add reset square if false
             }
         }
         return false;
@@ -93,7 +93,8 @@ public class Sudoku {
                         result[j][k] = nn[k] - '0';
                     }
                 }
-                solveSudoku(result, 0, 0);
+                solveSudoku(result, 0, 0); // all 50 puzzles are solved when using scanner but not when using single
+                                           // grids
             }
             System.out.println(Sudoku.sum);
 
@@ -101,6 +102,5 @@ public class Sudoku {
             e1.printStackTrace();
         }
     }
-
 
 }
