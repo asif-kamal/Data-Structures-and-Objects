@@ -18,11 +18,12 @@ public class Sudoku {
                 System.out.println(Arrays.toString(rowN));
             }
             System.out.println();
-            sum += (100 * board[0][0] + 10 * board[0][1] + board[0][2]);
+            sum += (100 * board[0][0] + 10 * board[0][1] + board[0][2]);// sum up top leftmost 3 digit numbers of each
+                                                                        // solution
             return true;
         }
         if (board[row][col] != 0) {
-            return solveSudoku(board, row, col + 1); // had to return method result instead of just running the method
+            return solveSudoku(board, row, col + 1); // had to return method instead of just running the method
         }
         for (int i = 1; i <= board.length; i++) {
             if (isValid(board, row, col, i)) {
@@ -30,7 +31,7 @@ public class Sudoku {
                 if (solveSudoku(board, row, col + 1)) {
                     return true;
                 }
-                board[row][col] = 0;// needed to add reset square if false
+                board[row][col] = 0;// needed to add to reset square if false
             }
         }
         return false;
@@ -64,12 +65,12 @@ public class Sudoku {
 
     private static boolean isBoxValid(int[][] board, int row, int col, int i) {
         // how to check the 3x3 box for duplicates?
-        int subGridRow = (row / 3) * 3;
-        int subGridCol = (col / 3) * 3;
+        int subGridRow = (row / 3) * 3;// to figure out which subgrid the row is in
+        int subGridCol = (col / 3) * 3;// to figure out which subgrid the column is in
 
-        for (int j = 0; j < 3; j++) {
-            for (int k = 0; k < 3; k++) {
-                if (board[subGridRow + j][subGridCol + k] == i) {
+        for (int j = 0; j < 3; j++) {// for j, iterate from 0 to 2
+            for (int k = 0; k < 3; k++) {// for k, iterate from 0 to 2
+                if (board[subGridRow + j][subGridCol + k] == i) {// check if board position equals i
                     return false;
                 }
             }
@@ -83,20 +84,21 @@ public class Sudoku {
         try {
             Scanner s = new Scanner(new File("p096_sudoku.txt"));
 
-            for (int i = 0; i < 50; i++) {
-                s.nextLine();
-                int[][] result = new int[9][9];
-                for (int j = 0; j < 9; j++) {
-                    String n = s.nextLine();
-                    char[] nn = n.toCharArray();
-                    for (int k = 0; k < 9; k++) {
-                        result[j][k] = nn[k] - '0';
+            for (int i = 0; i < 50; i++) {// iterates over all 50 puzzles
+                s.nextLine(); // consume empty line
+                int[][] result = new int[9][9]; // create new 9x9 array of arrays
+                for (int j = 0; j < 9; j++) {// iterate over each row as j
+                    String n = s.nextLine();// assign nextLine() to variable n
+                    char[] nn = n.toCharArray();// convert string to char array and assign to nn
+                    for (int k = 0; k < 9; k++) { // iterate over col as k from 0 to 8
+                        result[j][k] = nn[k] - '0';// converts char to integer and assigns integer to position
+                                                   // result[j][k]
                     }
                 }
                 solveSudoku(result, 0, 0); // all 50 puzzles are solved when using scanner but not when using single
                                            // grids
             }
-            System.out.println(Sudoku.sum);
+            System.out.println(Sudoku.sum);// prints sum variable of Sudoku class
 
         } catch (FileNotFoundException e1) {
             e1.printStackTrace();
