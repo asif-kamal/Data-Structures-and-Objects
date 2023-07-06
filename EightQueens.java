@@ -16,7 +16,8 @@ public class EightQueens {
                 if (eightQueens(board, col + 1)) {
                     return true;
                 }
-                board[i][col] = 0;
+                board[i][col] = 0; //moving this line inside of the first if 
+                //block works as well as just inside the for loop
             }
         }
         return false;
