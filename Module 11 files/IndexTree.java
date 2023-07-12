@@ -1,4 +1,4 @@
-package index;
+// package index;
 
 // Your class. Notice how it has no generics.
 // This is because we use generics when we have no idea what kind of data we are getting
@@ -14,7 +14,6 @@ public class IndexTree {
 	// It doesn't need to do anything
 	public IndexTree() {
 		this.root = null;
-		this.size = 0;
 	}
 	// complete the methods below
 
@@ -31,18 +30,19 @@ public class IndexTree {
 	// you want to add it to the IndexNode that already exists
 	// otherwise make a new indexNode
 	private IndexNode add(IndexNode root, String word, int lineNumber) {
-		if (root = null) {
-			return new IndexNode<>(word);
+		if (root == null) {
+			return new IndexNode(word, lineNumber);
 		}
 		int comparison = word.compareTo(root.word);
 		if (comparison == 0) {
+			root = add(root, word, lineNumber);
 			return root;
 		}
 		if (comparison < 0) {
-			root.left = add(root.left, word);
+			root.left = add(root.left, word, lineNumber);
 			return root;
 		} else {
-			root.right = add(root.left, word);
+			root.right = add(root.right, word, lineNumber);
 			return root;
 		}
 		// return null;
@@ -56,33 +56,32 @@ public class IndexTree {
 		int comparison = word.compareTo(root.word);
 		if (comparison == 0) {
 			return true;
-		}
-		else if (comparison < 0) {
-			return contains(root.left, word);
+		} else if (comparison < 0) {
+			return contains(word);
 		} else {
-			return contains(root.right, word);
+			return contains(word);
 		}
 	}
 
 	// call your recursive method
 	// use book as guide
 	public void delete(String word) {
-		this.root = this.remove(this.root, word);
+		this.root = delete(this.root, word);
 	}
 
 	// your recursive case
 	// remove the word and all the entries for the word
 	// This should be no different than the regular technique.
 	private IndexNode delete(IndexNode root, String word) {
-		if (root = null) {
+		if (root == null) {
 			return null;
 		}
 		int comparison = word.compareTo(root.word);
 		if (comparison < 0) {
-			root.left = remove(root.left, word);
+			root.left = delete(root.left, word);
 			return root;
 		} else if (comparison > 0) {
-			root.right = remove(root.right, word);
+			root.right = delete(root.right, word);
 		} else {
 			if (root.left == null && root.right == null) {
 				return null;
@@ -96,9 +95,10 @@ public class IndexTree {
 					current = current.right;
 				}
 				root.word = current.word;
-				root.left = remove(root.left, root.word);
+				root.left = delete(root.left, root.word);
 			}
 		}
+		return root;
 	}
 
 	// prints all the words in the index in inorder order
