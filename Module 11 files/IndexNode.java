@@ -22,7 +22,8 @@ public class IndexNode {
 	// it should initialize the list and set occurrences to 1
 	public IndexNode(String word, int lineNumber) {
 		this.word = word;
-		this.list = new ArrayList<>(lineNumber);
+		this.list = new ArrayList<>();
+		this.list.add(lineNumber);
 		occurences = 1;
 	}
 
