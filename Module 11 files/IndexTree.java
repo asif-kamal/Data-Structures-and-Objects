@@ -6,13 +6,7 @@
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Scanner;
-import java.util.Set;
 
 public class IndexTree {
 
@@ -48,7 +42,7 @@ public class IndexTree {
 		if (comparison == 0) {
 			root.occurences++;
 			root.list.add(lineNumber);
-			//root = add(root, word, lineNumber);
+			// root = add(root, word, lineNumber);
 			return root;
 		}
 		if (comparison < 0) {
@@ -125,6 +119,7 @@ public class IndexTree {
 		} else {
 			printIndex(root.left);
 			System.out.println(root.word + " " + root.occurences + " " + root.list);
+			System.out.println();
 			printIndex(root.right);
 		}
 	}
@@ -135,7 +130,6 @@ public class IndexTree {
 		// add all the words to the tree
 		String fileName = "pg100.txt";
 		int lineNumberCount = 0;
-		Map<String, Integer> map = new HashMap<>();
 
 		try {
 			Scanner scanner = new Scanner(new File(fileName));
@@ -145,10 +139,11 @@ public class IndexTree {
 				// }
 				String line = scanner.nextLine();
 				// System.out.println(line + " - Line Number: " + lineNumberCount);
-				String[] words = line.split("\\s+");
+				String[] words = line.split("[\\s-]+");
 				for (String word : words) {
-					word = word.replaceAll("[\\p{Punct}\\s]+", "");
-					map.put(word, lineNumberCount);
+					// word = word.replaceAll("[\\p{Punct}]+", "");
+					word = word.replaceAll("^(\'|\\s)|(\'|\\s)$|[.,:;&?!\\s\\<\\>\\(\\)\\{\\}\\[\\]\"\"]|&", "");
+					index.add(word, lineNumberCount);
 					// System.out.println(word);
 				}
 			}
@@ -158,17 +153,11 @@ public class IndexTree {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		Set<Map.Entry<String, Integer>> set = map.entrySet();
-		List<Map.Entry<String, Integer>> list = new ArrayList<>(set);
-		// System.out.println(list.isEmpty());
-		for (Entry<String, Integer> entry : list) {
-			index.add(entry.getKey(), entry.getValue());
-			// System.out.println(entry.getKey() + " : " + entry.getValue());
-
-		}
 		// print out the index
-		index.printIndex(index.root);
+		//index.printIndex(index.root);
 		// test removing a word from the index
+		index.delete("yongrey");
+		index.printIndex(index.root);
 
 	}
 }
