@@ -21,7 +21,8 @@ public class IndexNode {
 	// Constructor should take in a word and a line number
 	// it should initialize the list and set occurrences to 1
 	public IndexNode(String word, int lineNumber) {
-		List<Integer> list = new ArrayList<>();
+		this.word = word;
+		this.list = new ArrayList<>(lineNumber);
 		occurences = 1;
 	}
 

@@ -35,7 +35,9 @@ public class IndexTree {
 		}
 		int comparison = word.compareTo(root.word);
 		if (comparison == 0) {
-			root = add(root, word, lineNumber);
+			root.occurences++;
+			root.list.add(lineNumber);
+			// root = add(root, word, lineNumber);
 			return root;
 		}
 		if (comparison < 0) {
@@ -49,7 +51,7 @@ public class IndexTree {
 	}
 
 	// returns true if the word is in the index
-	public boolean contains(String word) {
+	public boolean contains(IndexNode root, String word) {
 		if (root == null) {
 			return false;
 		}
@@ -57,9 +59,9 @@ public class IndexTree {
 		if (comparison == 0) {
 			return true;
 		} else if (comparison < 0) {
-			return contains(word);
+			return contains(root.left, word);
 		} else {
-			return contains(word);
+			return contains(root.right, word);
 		}
 	}
 
@@ -106,8 +108,14 @@ public class IndexTree {
 	// this should print out each word followed by the number of occurrences and the
 	// list of all occurrences
 	// each word and its data gets its own line
-	public void printIndex() {
-
+	public void printIndex(IndexNode root) {
+		if (root == null) {
+			return;
+		} else {
+			printIndex(root.left);
+			System.out.print(root.word + " " + root.occurences + " " + root.list);
+			printIndex(root.right);
+		}
 	}
 
 	public static void main(String[] args) {
@@ -116,7 +124,7 @@ public class IndexTree {
 		// add all the words to the tree
 
 		// print out the index
-
+		
 		// test removing a word from the index
 
 	}
