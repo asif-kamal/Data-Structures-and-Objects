@@ -38,7 +38,7 @@ public class IndexTree {
 		if (root == null) {
 			return new IndexNode(word, lineNumber);
 		}
-		int comparison = word.compareTo(root.word);
+		int comparison = word.compareToIgnoreCase(root.word);
 		if (comparison == 0) {
 			root.occurences++;
 			root.list.add(lineNumber);
@@ -139,10 +139,12 @@ public class IndexTree {
 				// }
 				String line = scanner.nextLine();
 				// System.out.println(line + " - Line Number: " + lineNumberCount);
-				String[] words = line.split("[\\s-]+");
+				String[] words = line.split("[\\s]+");
 				for (String word : words) {
 					// word = word.replaceAll("[\\p{Punct}]+", "");
-					word = word.replaceAll("^(\'|\\s)|(\'|\\s)$|[.,:;&?!\\s\\<\\>\\(\\)\\{\\}\\[\\]\"\"]|&", "");
+					word = word.replaceAll(
+							"^(\'|\\s)|(\'|\\s)$|[.,:;&?!\\s\\<\\>\\(\\)\\{\\}\\[\\]\"\"]|&|(?<![a-zA-Z])-|-(?![a-zA-Z])",
+							"");
 					index.add(word, lineNumberCount);
 					// System.out.println(word);
 				}
@@ -154,7 +156,7 @@ public class IndexTree {
 			e1.printStackTrace();
 		}
 		// print out the index
-		//index.printIndex(index.root);
+		// index.printIndex(index.root);
 		// test removing a word from the index
 		index.delete("yongrey");
 		index.printIndex(index.root);
