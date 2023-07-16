@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
 //Insertion Method from: https://chat.openai.com
@@ -65,10 +64,11 @@ public class InsertionSort {
                 sumOfElapsedTime += d.elapsedTime;
             }
             System.out
-                    .println("n (array length): " + n + "\t" + "Average Out of 100" + "\t" + "Exchanges: " + sumOfExchanges/100 + "\t"
+                    .println("n (array length): " + n + "\t" + "Average Out of 100" + "\t" + "Exchanges: "
+                            + sumOfExchanges / 100 + "\t"
                             + "Comparisons: "
-                            + sumOfComparisons/100
-                            + "\t" + "Elapsed Time(ns): " + sumOfElapsedTime/100);
+                            + sumOfComparisons / 100
+                            + "\t" + "Elapsed Time(ns): " + sumOfElapsedTime / 100);
         }
     }
 }
