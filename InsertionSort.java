@@ -82,7 +82,7 @@ public class InsertionSort {
             outputArr.add(output);
         }
         // Write the data to a CSV file
-        FileWriter fw = new FileWriter("results.csv");
+        FileWriter fw = new FileWriter("resultsIS.csv");
         for (String line : outputArr) {
             fw.write(line + "\n");
         }
