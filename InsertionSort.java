@@ -73,11 +73,10 @@ public class InsertionSort {
                             + sumOfComparisons / 100
                             + "\t" + "Elapsed Time(ns): " + sumOfElapsedTime / 100);
 
-            String output = "n (array length): " + n + "\t" + "Average Out of 100" + "\t" + "Exchanges: "
+            String output = n + "\t"
                     + sumOfExchanges / 100 + "\t"
-                    + "Comparisons: "
                     + sumOfComparisons / 100
-                    + "\t" + "Elapsed Time(ns): " + sumOfElapsedTime / 100;
+                    + "\t" + sumOfElapsedTime / 100;
 
             outputArr.add(output);
         }
