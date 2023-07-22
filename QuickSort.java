@@ -23,7 +23,10 @@ public class QuickSort {
     }
 
     public static void quickSort(int[] arr, Data data) {
+        long start = System.nanoTime();
         quickSort(arr, 0, arr.length - 1, data);
+        long end = System.nanoTime();
+        data.elapsedTime = end - start;
     }
 
     private static void quickSort(int[] arr, int low, int high, Data data) {
