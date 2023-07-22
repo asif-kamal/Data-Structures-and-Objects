@@ -1,11 +1,11 @@
-n (array length): 64	Average Out of 100	Exchanges: 217	Comparisons: 352	Elapsed Time(ns): 0
-n (array length): 128	Average Out of 100	Exchanges: 740	Comparisons: 1240	Elapsed Time(ns): 0
-n (array length): 256	Average Out of 100	Exchanges: 1964	Comparisons: 3363	Elapsed Time(ns): 0
-n (array length): 512	Average Out of 100	Exchanges: 4716	Comparisons: 8286	Elapsed Time(ns): 0
-n (array length): 1024	Average Out of 100	Exchanges: 10968	Comparisons: 19558	Elapsed Time(ns): 0
-n (array length): 2048	Average Out of 100	Exchanges: 24811	Comparisons: 44790	Elapsed Time(ns): 0
-n (array length): 4096	Average Out of 100	Exchanges: 55674	Comparisons: 101228	Elapsed Time(ns): 0
-n (array length): 8192	Average Out of 100	Exchanges: 121458	Comparisons: 224932	Elapsed Time(ns): 0
-n (array length): 16384	Average Out of 100	Exchanges: 261571	Comparisons: 497084	Elapsed Time(ns): 0
-n (array length): 32768	Average Out of 100	Exchanges: 559482	Comparisons: 1093523	Elapsed Time(ns): 0
-n (array length): 65536	Average Out of 100	Exchanges: 1175191	Comparisons: 2431792	Elapsed Time(ns): 0
+64,224,357,0
+128,769,1257,0
+256,2002,3391,0
+512,4791,8295,0
+1024,11062,19606,0
+2048,25017,45194,0
+4096,55797,102049,0
+8192,121348,226822,0
+16384,262938,499925,0
+32768,559340,1098031,0
+65536,1169257,2432780,0

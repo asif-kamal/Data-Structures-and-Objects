@@ -84,11 +84,10 @@ public class QuickSort {
                             + sumOfComparisons / 100
                             + "\t" + "Elapsed Time(ns): " + sumOfElapsedTime / 100);
 
-            String output = "n (array length): " + n + "\t" + "Average Out of 100" + "\t" + "Exchanges: "
-                    + sumOfExchanges / 100 + "\t"
-                    + "Comparisons: "
+            String output = n + ","
+                    + sumOfExchanges / 100 + ","
                     + sumOfComparisons / 100
-                    + "\t" + "Elapsed Time(ns): " + sumOfElapsedTime / 100;
+                    + "," + sumOfElapsedTime / 100;
 
             outputArr.add(output);
         }
