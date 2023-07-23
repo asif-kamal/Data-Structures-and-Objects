@@ -26,8 +26,8 @@ public class TimSort {
 
     public static void timSort(int[] arr, Data data) {
         int n = arr.length;
-        int minRun = minRunLength(MIN_MERGE, n);
         long start = System.nanoTime();
+        int minRun = minRunLength(MIN_MERGE, n);
 
         // Perform insertion sort for small subarrays
         for (int i = 0; i < n; i += minRun) {
