@@ -83,27 +83,27 @@ public class CheatersHangman {
 
         Set<Character> guesses = new HashSet<>();
 
-        for (int i = 1; i <= dictionary.size(); i++) {
+        System.out.println("Enter word length: ");
+        int wordLength = scanner.nextInt();
+
+        while (!dictionary.containsKey(wordLength)) {
             System.out.println("Enter word length: ");
-            int wordLength = scanner.nextInt();
+            wordLength = scanner.nextInt();
+        }
+        System.out.println("Enter how many guesses you would like for this round: ");
+        int wrongGuesses = scanner.nextInt();
 
-            if (dictionary.containsKey(wordLength)) {
+        System.out.println("Enter a letter you would like to guess: ");
+        char letterGuess = scanner.next().charAt(0);
+        guesses.add(letterGuess);
 
-                System.out.println("Enter how many guesses you would like for this round: ");
-                int wrongGuesses = scanner.nextInt();
-
-                System.out.println("Enter a letter you would like to guess: ");
-                char letterGuess = scanner.next().charAt(0);
-                guesses.add(letterGuess);
-
-                for (Map.Entry<Integer, List<String>> entry : dictionary.entrySet()) {
-                    if (wordLength == entry.getKey()) {
-                        generateWordFamilies(guesses, entry.getValue());
-                        System.out.println("Found word length list");
-                    }
-                }
+        for (Map.Entry<Integer, List<String>> entry : dictionary.entrySet()) {
+            if (wordLength == entry.getKey()) {
+                generateWordFamilies(guesses, entry.getValue());
+                System.out.println("Found word length list");
             }
         }
+
         scanner.close();
     }
 }
