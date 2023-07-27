@@ -77,22 +77,33 @@ public class CheatersHangman {
     public static void main(String[] args) throws IOException {
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter word length: ");
-        int wordLength = scanner.nextInt();
 
         Map<Integer, List<String>> dictionary = new HashMap<>();
         dictionary = generateInitialWordLists();
 
         Set<Character> guesses = new HashSet<>();
 
-        for (Entry<Integer, List<String>> wordGroup : dictionary.entrySet()) {
-            if (wordGroup.getKey() == wordLength) {
-                generateWordFamilies(guesses, wordGroup.getValue());
+        for (int i = 1; i <= dictionary.size(); i++) {
+            System.out.println("Enter word length: ");
+            int wordLength = scanner.nextInt();
+
+            if (dictionary.containsKey(wordLength)) {
+
                 System.out.println("Enter how many guesses you would like for this round: ");
                 int wrongGuesses = scanner.nextInt();
+
+                System.out.println("Enter a letter you would like to guess: ");
+                char letterGuess = scanner.next().charAt(0);
+                guesses.add(letterGuess);
+
+                for (Map.Entry<Integer, List<String>> entry : dictionary.entrySet()) {
+                    if (wordLength == entry.getKey()) {
+                        generateWordFamilies(guesses, entry.getValue());
+                        System.out.println("Found word length list");
+                    }
+                }
             }
         }
-        System.out.println("Enter word length: ");
-        int wordLength2 = scanner.nextInt();
+        scanner.close();
     }
 }
