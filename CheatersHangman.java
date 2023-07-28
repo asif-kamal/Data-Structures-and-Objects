@@ -56,29 +56,61 @@ public class CheatersHangman {
 
     public static Map<String, List<String>> generateWordFamilies(Set<Character> guesses, List<String> wordList) {
         Map<String, List<String>> wordFamilies = new HashMap<>();
-        ArrayList<String> guessLetterShownArrList = new ArrayList<>();
 
         for (String word : wordList) {
-            for (char character : word.toCharArray()) {
-                for (char letter : guesses) {
-                    if (letter == character) {
+            StringBuilder underscored = new StringBuilder();
 
-                        String regex = "[^" + escapeSpecialCharacter(letter) + "]";
-                        String underscored = word.replaceAll(regex, "_");
-                        // guessLetterShownArrList.add(underscored);
-                        // System.out.println(guessLetterShownArrList);
-
-                        if (!wordFamilies.containsKey(underscored)) {
-                            wordFamilies.put(underscored, new ArrayList<>());
-                        }
-                        wordFamilies.get(underscored).add(word);
-
-                    }
+            for (char character : word.toLowerCase().toCharArray()) {
+                if (guesses.contains(character)) {
+                    underscored.append(character);
+                } else {
+                    underscored.append('_');
                 }
             }
+
+            String underscoredWord = underscored.toString();
+            if (!wordFamilies.containsKey(underscoredWord)) {
+                wordFamilies.put(underscoredWord, new ArrayList<>());
+            }
+            wordFamilies.get(underscoredWord).add(word);
         }
+
         System.out.println(wordFamilies);
         return wordFamilies;
+        // for (String word : wordList) {
+
+        // Set<Character> charSet = new HashSet<>();
+        // for (int i = 0; i < word.toLowerCase().toCharArray().length; i++) {
+        // charSet.add(word.toLowerCase().toCharArray()[i]);
+        // }
+
+        // for (char character : charSet) {
+
+        // for (char letter : guesses) {
+
+        // if (letter == character) {
+
+        // String regex = "[^" + escapeSpecialCharacter(letter) + "]";
+        // String underscored = word.replaceAll(regex, "_");
+        // // guessLetterShownArrList.add(underscored);
+        // // System.out.println(guessLetterShownArrList);
+
+        // if (!wordFamilies.containsKey(underscored)) {
+        // wordFamilies.put(underscored, new ArrayList<>());
+        // }
+        // wordFamilies.get(underscored).add(word);
+
+        // } else if (!charSet.contains(letter)) {
+        // String regex = "[^" + escapeSpecialCharacter(letter) + "]";
+        // String noMatch = word.toLowerCase().replaceAll(regex, "_");
+        // if (!wordFamilies.containsKey(noMatch)) {
+        // wordFamilies.put(noMatch, new ArrayList<>());
+        // }
+        // wordFamilies.get(noMatch).add(word);
+        // }
+        // }
+        // }
+        // }
         // create new map
     }
 
