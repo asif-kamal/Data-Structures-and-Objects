@@ -55,18 +55,31 @@ public class CheatersHangman {
      */
 
     public static Map<String, List<String>> generateWordFamilies(Set<Character> guesses, List<String> wordList) {
-        Map<Integer, List<String>> wordFamily = new HashMap<>();
-        for (char letter : guesses) {
-            for (String word : wordList) {
-                for (char character : word.toCharArray()) {
+        Map<String, List<String>> wordFamilies = new HashMap<>();
+        for (String word : wordList) {
+            for (char character : word.toCharArray()) {
+                for (char letter : guesses) {
                     if (letter == character) {
 
+                        String regex = "[^" + escapeSpecialCharacter(letter) + "]";
+                        //System.out.println(word.replaceAll(regex, "_"));
+                        // System.out.println(letter);
+                        // System.out.println(word.toCharArray());
                     }
                 }
             }
         }
         return null;
         // create new map
+    }
+
+    private static String escapeSpecialCharacter(char character) {
+        // Check if the character is a special character in regex and escape it if
+        // needed
+        if ("\\[](){}.*+?|^$".indexOf(character) != -1) {
+            return "\\" + character;
+        }
+        return String.valueOf(character);
     }
 
     public static List<String> chooseNewWordList(Map<String, List<String>> families) {
@@ -93,14 +106,17 @@ public class CheatersHangman {
         System.out.println("Enter how many guesses you would like for this round: ");
         int wrongGuesses = scanner.nextInt();
 
-        System.out.println("Enter a letter you would like to guess: ");
-        char letterGuess = scanner.next().charAt(0);
-        guesses.add(letterGuess);
+        System.out.println("Enter letter(s) you would like to guess: ");
+        String lettersGuessed = scanner.next();
+        String[] lettersGuessedStrArr = lettersGuessed.split("\\s+");
+        for (int i = 0; i < lettersGuessedStrArr.length; i++) {
+            guesses.add(lettersGuessedStrArr[i].charAt(0));
+            System.out.println(lettersGuessedStrArr[i].charAt(0));
+        }
 
         for (Map.Entry<Integer, List<String>> entry : dictionary.entrySet()) {
             if (wordLength == entry.getKey()) {
                 generateWordFamilies(guesses, entry.getValue());
-                System.out.println("Found word length list");
             }
         }
 
