@@ -56,20 +56,29 @@ public class CheatersHangman {
 
     public static Map<String, List<String>> generateWordFamilies(Set<Character> guesses, List<String> wordList) {
         Map<String, List<String>> wordFamilies = new HashMap<>();
+        ArrayList<String> guessLetterShownArrList = new ArrayList<>();
+
         for (String word : wordList) {
             for (char character : word.toCharArray()) {
                 for (char letter : guesses) {
                     if (letter == character) {
 
                         String regex = "[^" + escapeSpecialCharacter(letter) + "]";
-                        //System.out.println(word.replaceAll(regex, "_"));
-                        // System.out.println(letter);
-                        // System.out.println(word.toCharArray());
+                        String underscored = word.replaceAll(regex, "_");
+                        // guessLetterShownArrList.add(underscored);
+                        // System.out.println(guessLetterShownArrList);
+
+                        if (!wordFamilies.containsKey(underscored)) {
+                            wordFamilies.put(underscored, new ArrayList<>());
+                        }
+                        wordFamilies.get(underscored).add(word);
+
                     }
                 }
             }
         }
-        return null;
+        System.out.println(wordFamilies);
+        return wordFamilies;
         // create new map
     }
 
@@ -107,12 +116,8 @@ public class CheatersHangman {
         int wrongGuesses = scanner.nextInt();
 
         System.out.println("Enter letter(s) you would like to guess: ");
-        String lettersGuessed = scanner.next();
-        String[] lettersGuessedStrArr = lettersGuessed.split("\\s+");
-        for (int i = 0; i < lettersGuessedStrArr.length; i++) {
-            guesses.add(lettersGuessedStrArr[i].charAt(0));
-            System.out.println(lettersGuessedStrArr[i].charAt(0));
-        }
+        char letterGuessed = scanner.next().charAt(0);
+        guesses.add(letterGuessed);
 
         for (Map.Entry<Integer, List<String>> entry : dictionary.entrySet()) {
             if (wordLength == entry.getKey()) {
