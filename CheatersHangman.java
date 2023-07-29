@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -75,56 +77,30 @@ public class CheatersHangman {
             wordFamilies.get(underscoredWord).add(word);
         }
 
-        System.out.println(wordFamilies);
+        // System.out.println(wordFamilies);
+        chooseNewWordList(wordFamilies);
         return wordFamilies;
-        // for (String word : wordList) {
-
-        // Set<Character> charSet = new HashSet<>();
-        // for (int i = 0; i < word.toLowerCase().toCharArray().length; i++) {
-        // charSet.add(word.toLowerCase().toCharArray()[i]);
-        // }
-
-        // for (char character : charSet) {
-
-        // for (char letter : guesses) {
-
-        // if (letter == character) {
-
-        // String regex = "[^" + escapeSpecialCharacter(letter) + "]";
-        // String underscored = word.replaceAll(regex, "_");
-        // // guessLetterShownArrList.add(underscored);
-        // // System.out.println(guessLetterShownArrList);
-
-        // if (!wordFamilies.containsKey(underscored)) {
-        // wordFamilies.put(underscored, new ArrayList<>());
-        // }
-        // wordFamilies.get(underscored).add(word);
-
-        // } else if (!charSet.contains(letter)) {
-        // String regex = "[^" + escapeSpecialCharacter(letter) + "]";
-        // String noMatch = word.toLowerCase().replaceAll(regex, "_");
-        // if (!wordFamilies.containsKey(noMatch)) {
-        // wordFamilies.put(noMatch, new ArrayList<>());
-        // }
-        // wordFamilies.get(noMatch).add(word);
-        // }
-        // }
-        // }
-        // }
         // create new map
     }
 
-    private static String escapeSpecialCharacter(char character) {
-        // Check if the character is a special character in regex and escape it if
-        // needed
-        if ("\\[](){}.*+?|^$".indexOf(character) != -1) {
-            return "\\" + character;
-        }
-        return String.valueOf(character);
-    }
-
     public static List<String> chooseNewWordList(Map<String, List<String>> families) {
-        return null;
+        List<String> maxFamily = new ArrayList<>();
+
+        String maxKey = families.entrySet().stream()
+                .max(Comparator.comparingInt(entry -> entry.getValue().size()))
+                .get().getKey();
+
+        for (Map.Entry<String, List<String>> family : families.entrySet()) {
+            if (maxKey == family.getKey()) {
+                maxFamily = family.getValue();
+                System.out.println(family.getKey());
+            }
+        }
+        // for (int i = 0; i < maxFamily.size(); i++) {
+        //     System.out.println(maxFamily.get(i));
+        // }
+        
+        return maxFamily;
 
     }
 
