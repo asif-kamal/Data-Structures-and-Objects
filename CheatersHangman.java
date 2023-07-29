@@ -16,6 +16,10 @@ import java.util.Map.Entry;
 import java.util.List;
 
 public class CheatersHangman {
+
+    private static int guessesLeft = 0;
+    private static Set<Character> guesses = new HashSet<>();
+
     public static Map<Integer, List<String>> generateInitialWordLists() throws IOException {
         // open dictionary file
         // read in all the words
@@ -76,7 +80,10 @@ public class CheatersHangman {
             }
             wordFamilies.get(underscoredWord).add(word);
         }
-
+        for (char letter : guesses) {
+            System.out.println();
+            System.out.print(letter + " " + (guessesLeft - 1) + " ");
+        }
         // System.out.println(wordFamilies);
         chooseNewWordList(wordFamilies);
         return wordFamilies;
@@ -96,10 +103,7 @@ public class CheatersHangman {
                 System.out.println(family.getKey());
             }
         }
-        // for (int i = 0; i < maxFamily.size(); i++) {
-        //     System.out.println(maxFamily.get(i));
-        // }
-        
+        // System.out.println(maxFamily);
         return maxFamily;
 
     }
@@ -120,8 +124,9 @@ public class CheatersHangman {
             System.out.println("Enter word length: ");
             wordLength = scanner.nextInt();
         }
+
         System.out.println("Enter how many guesses you would like for this round: ");
-        int wrongGuesses = scanner.nextInt();
+        guessesLeft = scanner.nextInt();
 
         System.out.println("Enter letter(s) you would like to guess: ");
         char letterGuessed = scanner.next().charAt(0);
