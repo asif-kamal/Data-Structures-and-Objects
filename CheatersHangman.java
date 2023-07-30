@@ -18,7 +18,10 @@ import java.util.List;
 public class CheatersHangman {
 
     private static int guessesLeft = 0;
+    private static int wordLength = 0;
     private static Set<Character> guesses = new HashSet<>();
+    private static List<String> maxFamily = new ArrayList<>();
+    private static Map<Integer, List<String>> dictionary = new HashMap<>();
 
     public static Map<Integer, List<String>> generateInitialWordLists() throws IOException {
         // open dictionary file
@@ -80,10 +83,6 @@ public class CheatersHangman {
             }
             wordFamilies.get(underscoredWord).add(word);
         }
-        for (char letter : guesses) {
-            System.out.println();
-            System.out.print(letter + " " + (guessesLeft - 1) + " ");
-        }
         // System.out.println(wordFamilies);
         chooseNewWordList(wordFamilies);
         return wordFamilies;
@@ -91,7 +90,7 @@ public class CheatersHangman {
     }
 
     public static List<String> chooseNewWordList(Map<String, List<String>> families) {
-        List<String> maxFamily = new ArrayList<>();
+        // List<String> maxFamily = new ArrayList<>();
 
         String maxKey = families.entrySet().stream()
                 .max(Comparator.comparingInt(entry -> entry.getValue().size()))
@@ -112,30 +111,37 @@ public class CheatersHangman {
 
         Scanner scanner = new Scanner(System.in);
 
-        Map<Integer, List<String>> dictionary = new HashMap<>();
         dictionary = generateInitialWordLists();
 
         Set<Character> guesses = new HashSet<>();
 
         System.out.println("Enter word length: ");
-        int wordLength = scanner.nextInt();
+        wordLength = scanner.nextInt();
 
         while (!dictionary.containsKey(wordLength)) {
             System.out.println("Enter word length: ");
             wordLength = scanner.nextInt();
         }
 
-        System.out.println("Enter how many guesses you would like for this round: ");
-        guessesLeft = scanner.nextInt();
-
-        System.out.println("Enter letter(s) you would like to guess: ");
-        char letterGuessed = scanner.next().charAt(0);
-        guesses.add(letterGuessed);
-
         for (Map.Entry<Integer, List<String>> entry : dictionary.entrySet()) {
             if (wordLength == entry.getKey()) {
                 generateWordFamilies(guesses, entry.getValue());
             }
+        }
+
+        System.out.println("Enter how many guesses you would like for this round: ");
+        guessesLeft = scanner.nextInt();
+
+        while (guessesLeft != 0) {
+            System.out.println("Enter letter(s) you would like to guess: ");
+            String lettersGuessed = scanner.next();
+            for (int i = 0; i < lettersGuessed.length(); i++) {
+                guesses.add(lettersGuessed.charAt(i));
+                guessesLeft--;
+                System.out.println(guesses + " " + guessesLeft);
+                System.out.println();
+            }
+            generateWordFamilies(guesses, maxFamily);
         }
 
         scanner.close();
