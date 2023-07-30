@@ -5,23 +5,24 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.Map.Entry;
 import java.util.List;
 
 public class CheatersHangman {
 
     private static int guessesLeft = 0;
     private static int wordLength = 0;
+    private static String maxFamilyKey;
+    private static String underscoredWord;
     private static Set<Character> guesses = new HashSet<>();
     private static List<String> maxFamily = new ArrayList<>();
     private static Map<Integer, List<String>> dictionary = new HashMap<>();
+    private static Scanner scanner = new Scanner(System.in);
 
     public static Map<Integer, List<String>> generateInitialWordLists() throws IOException {
         // open dictionary file
@@ -63,7 +64,8 @@ public class CheatersHangman {
      * 
      */
 
-    public static Map<String, List<String>> generateWordFamilies(Set<Character> guesses, List<String> wordList) {
+    public static Map<String, List<String>> generateWordFamilies(Set<Character> guesses, List<String> wordList)
+            throws IOException {
         Map<String, List<String>> wordFamilies = new HashMap<>();
 
         for (String word : wordList) {
@@ -77,11 +79,13 @@ public class CheatersHangman {
                 }
             }
 
-            String underscoredWord = underscored.toString();
+            underscoredWord = underscored.toString();
+            // System.out.println(underscoredWord);
             if (!wordFamilies.containsKey(underscoredWord)) {
                 wordFamilies.put(underscoredWord, new ArrayList<>());
             }
             wordFamilies.get(underscoredWord).add(word);
+
         }
         // System.out.println(wordFamilies);
         chooseNewWordList(wordFamilies);
@@ -89,7 +93,7 @@ public class CheatersHangman {
         // create new map
     }
 
-    public static List<String> chooseNewWordList(Map<String, List<String>> families) {
+    public static List<String> chooseNewWordList(Map<String, List<String>> families) throws IOException {
         // List<String> maxFamily = new ArrayList<>();
 
         String maxKey = families.entrySet().stream()
@@ -99,22 +103,22 @@ public class CheatersHangman {
         for (Map.Entry<String, List<String>> family : families.entrySet()) {
             if (maxKey == family.getKey()) {
                 maxFamily = family.getValue();
+                maxFamilyKey = family.getKey();
                 System.out.println(family.getKey());
             }
         }
-        // System.out.println(maxFamily);
+        // System.out.println(maxFamily.get(0));
         return maxFamily;
 
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void playHangman() throws IOException {
 
         Scanner scanner = new Scanner(System.in);
-
-        dictionary = generateInitialWordLists();
-
         Set<Character> guesses = new HashSet<>();
 
+        dictionary = generateInitialWordLists();
+        System.out.println();
         System.out.println("Enter word length: ");
         wordLength = scanner.nextInt();
 
@@ -123,27 +127,70 @@ public class CheatersHangman {
             wordLength = scanner.nextInt();
         }
 
+        System.out.println("Enter how many guesses you would like for this round: ");
+        guessesLeft = scanner.nextInt();
+
         for (Map.Entry<Integer, List<String>> entry : dictionary.entrySet()) {
             if (wordLength == entry.getKey()) {
                 generateWordFamilies(guesses, entry.getValue());
             }
         }
 
-        System.out.println("Enter how many guesses you would like for this round: ");
-        guessesLeft = scanner.nextInt();
-
-        while (guessesLeft != 0) {
+        while (underscoredWord != maxFamilyKey.toString().toLowerCase() && guessesLeft > 0) {
             System.out.println("Enter letter(s) you would like to guess: ");
             String lettersGuessed = scanner.next();
             for (int i = 0; i < lettersGuessed.length(); i++) {
                 guesses.add(lettersGuessed.charAt(i));
                 guessesLeft--;
+                System.out.println();
                 System.out.println(guesses + " " + guessesLeft);
                 System.out.println();
             }
             generateWordFamilies(guesses, maxFamily);
         }
+        if (underscoredWord == maxFamilyKey.toString().toLowerCase() && guessesLeft >= 0 && guesses != null) {
+            for (int i = 0; i < underscoredWord.length(); i++) {
+                if (underscoredWord.charAt(i) != '_') {
+                    System.out.println("You are a winner!");
+                    System.out.println("Play again? y/n");
+                    scanner.nextLine();
+                    String yesNo = scanner.nextLine();
+                    System.out.println();
+                    if (yesNo != null && yesNo.charAt(0) == 'n') {
+                        System.out.println("Thanks for playing!");
+                        return;
+                    } else if (yesNo != null && yesNo.charAt(0) == 'y') {
+                        playHangman();
+                    } else {
+                        return;
+                    }
+                }
+            }
 
+        } else if (underscoredWord != maxFamilyKey.toString().toLowerCase() && guessesLeft == 0
+                && guesses != null) {
+            for (int i = 0; i < underscoredWord.length(); i++) {
+                if (underscoredWord.charAt(i) == '_') {
+                    System.out.println();
+                    System.out.println("Word was " + maxFamily.get(i));
+                    System.out.println("Sorry, you lose. Try again? y/n");
+                    scanner.nextLine();
+                    String yesNo = scanner.nextLine();
+                    if (yesNo != null && yesNo.charAt(0) == 'n') {
+                        System.out.println("Thanks for playing!");
+                        return;
+                    } else if (yesNo != null && yesNo.charAt(0) == 'y') {
+                        playHangman();
+                    } else {
+                        return;
+                    }
+                }
+            }
+        }
         scanner.close();
+    }
+
+    public static void main(String[] args) throws IOException {
+        playHangman();
     }
 }
