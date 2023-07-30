@@ -136,21 +136,22 @@ public class CheatersHangman {
             }
         }
 
-        while (underscoredWord != maxFamilyKey.toString().toLowerCase() && guessesLeft > 0) {
+        while (guessesLeft > 0 && guesses != null) {
             System.out.println("Enter letter(s) you would like to guess: ");
-            String lettersGuessed = scanner.next();
-            for (int i = 0; i < lettersGuessed.length(); i++) {
-                guesses.add(lettersGuessed.charAt(i));
-                guessesLeft--;
-                System.out.println();
-                System.out.println(guesses + " " + guessesLeft);
-                System.out.println();
-            }
+            String letterGuessed = scanner.next();
+            // for (int i = 0; i < lettersGuessed.length(); i++) {
+            guesses.add(letterGuessed.charAt(0));
+            guessesLeft--;
+            System.out.println();
+            System.out.println(guesses + " " + guessesLeft);
+            System.out.println();
+            // }
             generateWordFamilies(guesses, maxFamily);
-        }
-        if (underscoredWord == maxFamilyKey.toString().toLowerCase() && guessesLeft >= 0 && guesses != null) {
-            for (int i = 0; i < underscoredWord.length(); i++) {
-                if (underscoredWord.charAt(i) != '_') {
+
+            if (underscoredWord == maxFamilyKey.toString().toLowerCase() && guessesLeft >= 0 && guesses != null) {
+
+                if (!(underscoredWord.contains("_"))) {
+                    System.out.println();
                     System.out.println("You are a winner!");
                     System.out.println("Play again? y/n");
                     scanner.nextLine();
@@ -158,32 +159,41 @@ public class CheatersHangman {
                     System.out.println();
                     if (yesNo != null && yesNo.charAt(0) == 'n') {
                         System.out.println("Thanks for playing!");
+                        guessesLeft = 0;
+                        scanner.close();
                         return;
                     } else if (yesNo != null && yesNo.charAt(0) == 'y') {
                         playHangman();
                     } else {
+                        guessesLeft = 0;
+                        scanner.close();
                         return;
                     }
-                }
-            }
 
-        } else if (underscoredWord != maxFamilyKey.toString().toLowerCase() && guessesLeft == 0
-                && guesses != null) {
-            for (int i = 0; i < underscoredWord.length(); i++) {
-                if (underscoredWord.charAt(i) == '_') {
+                }
+
+            } else if (underscoredWord != maxFamilyKey.toString().toLowerCase() && guessesLeft == 0
+                    && guesses != null) {
+
+                if (underscoredWord.contains("_")) {
                     System.out.println();
-                    System.out.println("Word was " + maxFamily.get(i));
+                    System.out.println("Word was " + maxFamily.get(0));
                     System.out.println("Sorry, you lose. Try again? y/n");
                     scanner.nextLine();
                     String yesNo = scanner.nextLine();
                     if (yesNo != null && yesNo.charAt(0) == 'n') {
                         System.out.println("Thanks for playing!");
+                        guessesLeft = 0;
+                        scanner.close();
                         return;
                     } else if (yesNo != null && yesNo.charAt(0) == 'y') {
                         playHangman();
                     } else {
+                        guessesLeft = 0;
+                        scanner.close();
                         return;
                     }
+
                 }
             }
         }
