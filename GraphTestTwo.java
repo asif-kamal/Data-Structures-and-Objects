@@ -51,16 +51,23 @@ public class GraphTestTwo {
 
     public static void main(String[] args) {
         Graph<Integer, String> g = new SparseGraph<>();
-        for (int i = 1; i < 7; i++) {
-            g.addVertex(i);
-        }
+        // for (int i = 1; i < 7; i++) {
+        //     g.addVertex(i);
+        // }
 
-        g.addEdge("twoSix", 2, 6);
-        g.addEdge("fiveTwo", 5, 2);
-        g.addEdge("fiveOne", 5, 1);
-        g.addEdge("oneThree", 1, 3);
-        g.addEdge("fourThree", 4, 3);
-        g.addEdge("threeTwo", 3, 2);
+        // g.addEdge("twoSix", 2, 6);
+        // g.addEdge("fiveTwo", 5, 2);
+        // g.addEdge("fiveOne", 5, 1);
+        // g.addEdge("oneThree", 1, 3);
+        // g.addEdge("fourThree", 4, 3);
+        // g.addEdge("threeTwo", 3, 2);
+
+        g.addEdge("a", 0, 1);
+        g.addEdge("b", 0, 2);
+        g.addEdge("c", 1, 2);
+        g.addEdge("d", 2, 0);
+        g.addEdge("e", 2, 3);
+        g.addEdge("f", 3, 3);
 
         // g.addEdge("Edge_A", 0, 1);
         // g.addEdge("Edge_B", 0, 3);
@@ -77,7 +84,7 @@ public class GraphTestTwo {
         BasicVisualizationServer<Integer, String> vv = new BasicVisualizationServer<>(layout);
         vv.getRenderContext().setVertexLabelTransformer(new ToStringLabeller<>());
 
-        JFrame frame = new JFrame("BFS Visualization");
+        JFrame frame = new JFrame("DFS Visualization");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().add(vv);
         frame.pack();
@@ -85,6 +92,6 @@ public class GraphTestTwo {
         frame.setVisible(true);
 
         // Perform DFS traversal
-        dfs(g, 1, vv);
+        dfs(g, 2, vv);
     }
 }
