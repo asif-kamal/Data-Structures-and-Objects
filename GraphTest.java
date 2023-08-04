@@ -62,6 +62,17 @@ public class GraphTest {
         g.addEdge("fourThree", 4, 3);
         g.addEdge("threeTwo", 3, 2);
 
+        // g.addEdge("Edge_A", 0, 1);
+        // g.addEdge("Edge_B", 0, 3);
+        // g.addEdge("Edge_c", 0, 4);
+        // g.addEdge("Edge_D", 3, 4);
+        // g.addEdge("Edge_E", 1, 3);
+        // g.addEdge("Edge_F", 1, 4);
+        // g.addEdge("Edge_G", 0, 2);
+        // g.addEdge("Edge_H", 2, 6);
+        // g.addEdge("Edge_g", 2, 5);
+        // g.addEdge("Edge_l", 5, 6);
+
         FRLayout<Integer, String> layout = new FRLayout<Integer, String>(g);
         BasicVisualizationServer<Integer, String> vv = new BasicVisualizationServer<>(layout);
         vv.getRenderContext().setVertexLabelTransformer(new ToStringLabeller<>());
