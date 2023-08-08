@@ -2,10 +2,12 @@
 
 int main()
 {
-    float pi;
+    int c;
 
-    pi = 22.00 / 7.0;
-    printf("The ancients calculated PI as %f.", pi);
+    printf("Type a letter: ");
+    c = getchar();
+    printf("You typed '%c'.\n", c);
 
     return(0);
 }
+
