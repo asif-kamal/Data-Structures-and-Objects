@@ -2,11 +2,10 @@
 
 int main()
 {
-    char x,y,z;
-    x = 'A';
-    y = 'B';
-    z = 'C';
+    float pi;
 
-    printf("It's easy as %c%c%c!", x,y,z);
+    pi = 22.00 / 7.0;
+    printf("The ancients calculated PI as %f.", pi);
+
     return(0);
 }
