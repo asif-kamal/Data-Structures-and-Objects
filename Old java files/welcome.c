@@ -2,11 +2,12 @@
 
 int main()
 {
-    int c;
+    char x;
 
-    printf("Type a letter: ");
-    c = getchar();
-    printf("You typed '%c'.\n", c);
+    printf("Type a character: ");
+    scanf("%c", &x);
+    printf("Character %c\n", x);
+    
 
     return(0);
 }
