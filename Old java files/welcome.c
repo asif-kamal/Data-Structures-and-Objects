@@ -2,12 +2,11 @@
 
 int main()
 {
-    char x;
+    char name[15];
 
-    printf("Type a character: ");
-    scanf("%c", &x);
-    printf("Character %c\n", x);
-    
+    printf("Your name? ");
+    scanf("%s", name);
+    printf("You are %s.\n", name);
 
     return(0);
 }
